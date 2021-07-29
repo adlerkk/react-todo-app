@@ -11,6 +11,13 @@ const AddForm = ({ addNewTask }) => {
     ended: false
   }
 
+  const pushNewTaskKeyDown = ( event ) => {
+    if (event.key === "Enter" && event.target.value.length > 1){
+      addNewTask(newTask);
+      setTaskName('');
+    }
+  }
+
   const pushNewTask = () => {
     addNewTask(newTask);
     setTaskName('');
@@ -27,6 +34,7 @@ const AddForm = ({ addNewTask }) => {
         type={'text'}
         value={taskName}
         onChange={handleNewTask}
+        onKeyDown={pushNewTaskKeyDown}
         placeholder={'Add new task...'}
       />
 
