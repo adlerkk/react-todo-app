@@ -1,0 +1,31 @@
+.Task {
+  height: 40px;
+  display: grid;
+  text-align: left;
+  grid-template-columns: 15% 70% 15%;
+  border-bottom: #bdc3c7 1px solid;
+
+  .NotEnded {
+    color: #bdc3c7;
+  }
+
+  .Ended {
+    color: #2ecc71;
+  }
+
+  .Trash{
+    color: #e74c3c;
+  }
+
+  &--Icon{
+    cursor: pointer;
+    font-size: 24px;
+    margin: auto;
+  }
+
+  &--Name {
+    font-size: 18px;
+    font-weight: 600;
+    margin: auto 10px;
+  }
+}
