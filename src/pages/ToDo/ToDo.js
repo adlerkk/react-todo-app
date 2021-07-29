@@ -12,11 +12,8 @@ import data from './data';
 import './styles.scss';
 
 const loadTasks = () => {
-  let tasks = JSON.parse(localStorage.getItem('tasks'));
-
-  if ( !tasks ) {
-    tasks = data;
-  };
+  const localStorageTasks = JSON.parse(localStorage.getItem('tasks'));
+  const tasks = localStorageTasks ? localStorageTasks : data;
 
   return tasks;
 };
