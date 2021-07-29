@@ -1,8 +1,9 @@
+import { useState } from "react";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlusCircle } from "@fortawesome/free-solid-svg-icons";
 
 import './styles.scss';
-import { useState } from "react";
 
 const AddForm = ({ addNewTask }) => {
   const [ taskName, setTaskName ] = useState('');
@@ -28,14 +29,14 @@ const AddForm = ({ addNewTask }) => {
   };
 
   return (
-    <div className={'AddForm'}>
+    <div className='AddForm'>
       <input
-        className={'AddForm--Input'}
-        type={'text'}
+        className='AddForm--Input'
+        type='text'
         value={taskName}
         onChange={handleNewTask}
         onKeyDown={pushNewTaskKeyDown}
-        placeholder={'Add new task...'}
+        placeholder='Add new task...'
       />
 
       <FontAwesomeIcon

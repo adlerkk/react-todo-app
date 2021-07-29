@@ -2,7 +2,7 @@ import './styles.scss';
 
 const Title = ({ title }) => {
   return (
-    <div className={"Title"}>
+    <div className='Title'>
       <h3>{title}</h3>
     </div>
   );

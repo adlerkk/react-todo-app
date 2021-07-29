@@ -5,7 +5,6 @@ import './styles.scss';
 
 const ListElem = ({ data, deleteTask, updateTask }) => {
   const { taskName, ended } = data;
-
   const isCheckICO = ended ? 'Ended' : 'NotEnded';
   const isCheckName = ended ? 'NotEnded' : '';
 
@@ -18,7 +17,7 @@ const ListElem = ({ data, deleteTask, updateTask }) => {
   };
 
   return (
-    <div className={'Task'}>
+    <div className='Task'>
       <FontAwesomeIcon
         onClick={handleUpdate}
         className={`Task--Icon ${isCheckICO}`}
@@ -27,7 +26,7 @@ const ListElem = ({ data, deleteTask, updateTask }) => {
       <div className={`Task--Name ${isCheckName}`}>
         {taskName}
       </div>
-      <FontAwesomeIcon className={'Task--Icon Trash'} icon={faTrash} onClick={handleDelete}/>
+      <FontAwesomeIcon className='Task--Icon Trash' icon={faTrash} onClick={handleDelete}/>
     </div>
   );
 }

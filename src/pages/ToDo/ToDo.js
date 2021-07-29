@@ -1,14 +1,14 @@
 import { useState } from 'react';
 
-import { AddForm } from './components/AddForm';
-import { List } from './components/List';
-import { ListElem } from './components/ListElem';
 import { Title } from './components/Title';
 import { Image } from './components/Image';
 import { Panel } from './components/Panel';
+import { List } from './components/List';
+import { ListElem } from './components/ListElem';
+import { AddForm } from './components/AddForm';
 
-import data from './data';
 import DecorationIMG from './images/Mountains.png';
+import data from './data';
 import './styles.scss';
 
 const loadTasks = () => {
@@ -28,9 +28,9 @@ const loadSettings = () => {
 };
 
 const ToDo = () => {
-  const [ useLocalStorage, setUseLocalStorage ] = useState(loadSettings());
   const [ tasks, setTasks ] = useState(loadTasks());
   const [ searchData, setSearchData ] = useState(tasks);
+  const [ useLocalStorage, setUseLocalStorage ] = useState(loadSettings());
 
   const handleSearch = ( value ) => {
     if ( value.length > 1) {
@@ -72,8 +72,8 @@ const ToDo = () => {
   };
 
   return (
-    <div className={'App'}>
-      <Title title={'Simple ToDo App'} />
+    <div className='App'>
+      <Title title='Simple ToDo App' />
       <Image img={DecorationIMG} />
       <Panel
         data={tasks}
