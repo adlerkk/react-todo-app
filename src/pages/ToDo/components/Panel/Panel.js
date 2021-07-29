@@ -1,6 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSave } from '@fortawesome/free-solid-svg-icons';
 import './styles.scss';
+import { useState } from 'react';
 
 const countEndedTask = ( data ) => {
   let count = 0;
@@ -14,7 +15,8 @@ const countEndedTask = ( data ) => {
   return count;
 }
 
-const Statistics = ({ data, saveLocalStorage, setUseLocalStorage, updateLS }) => {
+const Panel = ({ data, saveLocalStorage, setUseLocalStorage, handleSearch }) => {
+  const [ inputValue, setInputValue ] = useState('');
   const taskCounter = data.length;
   const taskEnded = countEndedTask(data);
 
@@ -24,13 +26,25 @@ const Statistics = ({ data, saveLocalStorage, setUseLocalStorage, updateLS }) =>
     setUseLocalStorage(!saveLocalStorage);
   };
 
+  const handleInputChange = ( event ) => {
+    setInputValue(event.target.value);
+    handleSearch(inputValue);
+  }
+
   return (
-    <div className={'Statistics'}>
-      <div className={'Statistics--Count'}>{`${taskEnded} / ${taskCounter}`}</div>
-      <div className={'Statistics--SaveLocal'}>
+    <div className={'Panel'}>
+      <div className={'Panel--Count'}>{`${taskEnded} / ${taskCounter}`}</div>
+      <input
+        type={'text'}
+        className={'Panel--Input'}
+        placeholder={'Search task...'}
+        onChange={handleInputChange}
+        value={inputValue}
+      />
+      <div className={'Panel--SaveLocal'}>
         <FontAwesomeIcon
           onClick={handleSaveClick}
-          className={`Statistics--Icon ${saveLocalStorage ? 'Active' : ''}`}
+          className={`Panel--Icon ${saveLocalStorage ? 'Active' : ''}`}
           icon={faSave}
         />
       </div>
@@ -38,4 +52,4 @@ const Statistics = ({ data, saveLocalStorage, setUseLocalStorage, updateLS }) =>
   );
 }
 
-export default Statistics;
+export default Panel;

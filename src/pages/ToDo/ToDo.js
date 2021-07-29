@@ -5,7 +5,7 @@ import { List } from './components/List';
 import { ListElem } from './components/ListElem';
 import { Title } from './components/Title';
 import { Image } from './components/Image';
-import { Statistics } from './components/Statistics';
+import { Panel } from './components/Panel';
 
 import data from './data';
 import DecorationIMG from './images/Mountains.png';
@@ -30,6 +30,15 @@ const loadSettings = () => {
 const ToDo = () => {
   const [ useLocalStorage, setUseLocalStorage ] = useState(loadSettings());
   const [ tasks, setTasks ] = useState(loadTasks());
+  const [ searchList, setSearchList ] = useState(loadTasks());
+
+  const handleSearch = ( value ) => {
+    if ( value.length > 1) {
+      setSearchList(searchList.filter((task) => task.taskName.includes(value)));
+    } else {
+      setSearchList(tasks);
+    };
+  };
 
   const updateLS = ( data, key='tasks' ) => {
     if ( useLocalStorage ){
@@ -39,12 +48,14 @@ const ToDo = () => {
 
   const addTask = ( task ) => {
     const currentData = [...tasks, task];
+    setSearchList(currentData);
     setTasks(currentData);
     updateLS(currentData);
   };
 
   const deleteTask = ( taskToDelete ) => {
     const currentData = tasks.filter((task) => task !== taskToDelete);
+    setSearchList(currentData);
     setTasks(currentData);
     updateLS(currentData);
   };
@@ -54,6 +65,7 @@ const ToDo = () => {
     const index = currentData.findIndex((obj) => obj === taskToUpdate);
 
     currentData[index].ended = !currentData[index].ended;
+    setSearchList(currentData);
     setTasks(currentData);
     updateLS(currentData);
   };
@@ -62,13 +74,14 @@ const ToDo = () => {
     <div className={'App'}>
       <Title title={'Simple ToDo App'} />
       <Image img={DecorationIMG} />
-      <Statistics
+      <Panel
         data={tasks}
+        handleSearch={handleSearch}
         saveLocalStorage={useLocalStorage}
         setUseLocalStorage={setUseLocalStorage}
       />
       <List>
-        {tasks.map((value, index) => {
+        {searchList.map((value, index) => {
           return (
             <ListElem
               key={index}
