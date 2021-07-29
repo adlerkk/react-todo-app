@@ -28,7 +28,7 @@ const Panel = ({ data, saveLocalStorage, setUseLocalStorage, handleSearch }) => 
 
   const handleInputChange = ( event ) => {
     setInputValue(event.target.value);
-    handleSearch(inputValue);
+    handleSearch(event.target.value);
   }
 
   return (

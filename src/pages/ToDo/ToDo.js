@@ -30,13 +30,14 @@ const loadSettings = () => {
 const ToDo = () => {
   const [ useLocalStorage, setUseLocalStorage ] = useState(loadSettings());
   const [ tasks, setTasks ] = useState(loadTasks());
-  const [ searchList, setSearchList ] = useState(loadTasks());
+  const [ searchData, setSearchData ] = useState(tasks);
 
   const handleSearch = ( value ) => {
     if ( value.length > 1) {
-      setSearchList(searchList.filter((task) => task.taskName.includes(value)));
+      const currentData = tasks.filter((task) => task.taskName.includes(value));
+      setSearchData(currentData);
     } else {
-      setSearchList(tasks);
+      setSearchData(tasks);
     };
   };
 
@@ -48,14 +49,14 @@ const ToDo = () => {
 
   const addTask = ( task ) => {
     const currentData = [...tasks, task];
-    setSearchList(currentData);
+    setSearchData(currentData);
     setTasks(currentData);
     updateLS(currentData);
   };
 
   const deleteTask = ( taskToDelete ) => {
     const currentData = tasks.filter((task) => task !== taskToDelete);
-    setSearchList(currentData);
+    setSearchData(currentData);
     setTasks(currentData);
     updateLS(currentData);
   };
@@ -65,7 +66,7 @@ const ToDo = () => {
     const index = currentData.findIndex((obj) => obj === taskToUpdate);
 
     currentData[index].ended = !currentData[index].ended;
-    setSearchList(currentData);
+    setSearchData(currentData);
     setTasks(currentData);
     updateLS(currentData);
   };
@@ -81,7 +82,7 @@ const ToDo = () => {
         setUseLocalStorage={setUseLocalStorage}
       />
       <List>
-        {searchList.map((value, index) => {
+        {searchData.map((value, index) => {
           return (
             <ListElem
               key={index}
